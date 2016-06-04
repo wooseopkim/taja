@@ -2,6 +2,7 @@
 # TajaJS
 
 TajaJS is a simple Hangul library in JavaScript.
+[Demo Web Page (Works on Chrome)](https://linterpreteur.github.io/taja.js/)
 
 ### taja.compose(initial, middle, final)
 Composes given three letters into a single character block.
