@@ -1,0 +1,126 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <script src="./taja.js"></script>
+        <script>
+            ;(function() {
+                const eng = 'QWERTYUIOPASDFGHJKLZXCVBNM';
+                const kor = 'ㅂㅈㄷㄱㅅㅛㅕㅑㅐㅔㅁㄴㅇㄹㅎㅗㅓㅏㅣㅋㅌㅊㅍㅠㅜㅡ';
+                const keyMap = Object.assign(new (function() {
+                    Array.prototype.forEach.call(eng, ((_, i) => { this['Key' + eng[i]] = kor[i]; }));
+                    for (let i = 0; i <= 9; i++) this['Numpad' + i] = this['Digit' + i] = i;
+                })(), {
+                    Backquote: '`',
+                    Minus: '-',
+                    Equal: '=',
+                    Backspace: 'Backspace',
+                    BracketLeft: '[',
+                    BracketRight: ']',
+                    Backslash: '\\',
+                    Semicolon: ';',
+                    Quote: "'",
+                    Enter: '\n',
+                    ShiftLeft: 'ShiftLeft',
+                    Space: ' ',
+                    Comma: ',',
+                    Period: '.',
+                    Slash: '/',
+                });
+                
+                let commitSpan, preeditSpan;
+                window.onload = function() {
+                    commitSpan = document.querySelector('#commit');
+                    preeditSpan = document.querySelector('#preedit');
+                    onKey();
+                };
+                
+                let commitString = '';
+                let preeditChars = [];
+                
+                let shiftPressed = false;
+                
+                let clipboard = '';
+                
+                window.addEventListener('keydown', function(event) {
+                    let char = keyMap[event.code];
+                    if (char == null || event.defaultPrevented) return;
+                    
+                    if (event.ctrlKey) {
+                        if (event.code === 'KeyC') {
+                            clipboard = window.getSelection().toString();
+                        } else if (event.code === 'KeyV') {
+                            Array.prototype.forEach.call(clipboard, char => {
+                                preeditChars.push(char);
+                                onKey();
+                            });
+                        }
+                        return;
+                    }
+                    
+                    if (char === 'ShiftLeft') {
+                        shiftPressed = true;
+                        return;
+                    }
+                    if (char === 'Backspace') {
+                        if (preeditChars.length) {
+                            preeditChars.pop();
+                        } else if (commitString.length) {
+                            commitString = commitString.substring(0, commitString.length - 1);
+                        }
+                        onKey();
+                        return;
+                    }
+                    if (shiftPressed) {
+                        const shift =   '~!@#$%^&*()_+{}|ㅃㅉㄸㄲㅆㅒㅖ:"<>?';
+                        const normal =  "`1234567890-=[]\\ㅂㅈㄷㄱㅅㅐㅔ;',./";
+                        const i = normal.indexOf(char);
+                        if (i != -1) {
+                            char = shift[i];
+                        }
+                    }
+                    
+                    preeditChars.push(char);
+                    onKey();
+                    
+                    event.preventDefault();
+                });
+                window.addEventListener('keyup', function(event) {
+                    if (event.defaultPrevented) return;
+                    if (keyMap[event.code] === 'ShiftLeft') {
+                        shiftPressed = false;
+                    };
+                    event.preventDefault();
+                });
+                function onKey() {
+                    const commit = () => {
+                        const complete = grouped[0];
+                        commitString += complete;
+                        preeditChars = preeditChars.slice(taja.ungroup(complete)[0].length);
+                        grouped = grouped.slice(1);
+                    };
+                    let grouped = taja.group(preeditChars);
+                    if (grouped.length > 1) commit();
+                    commitSpan.innerText = commitString;
+                    grouped = grouped.trim() || grouped.trim() + ' ';
+                    preeditSpan.innerText = grouped;
+                }
+            })();
+        </script>
+        <style>
+            span.text {
+                white-space: pre-wrap;
+            }
+            #preedit {
+                background-color: black;
+                color:  white;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Hello, TajaJS!</h1>
+        <div>
+            <span id="commit" class="text"></span><span id="preedit" class="text"></span>
+        </div>
+    </body>
+</html>
