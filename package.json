@@ -1,6 +1,6 @@
 {
   "name": "taja",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Hangul automata in JavaScript",
   "main": "taja.js",
   "author": "Wooseop Kim",

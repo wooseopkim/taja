@@ -75,6 +75,7 @@
         return String.fromCharCode(first + initial + middle + final);
     }
     function group(keystrokes) {
+        keystrokes = Array.from(keystrokes);
         for (let i = keystrokes.length - 1; i >= -1; i--) {
             let a = keystrokes[i];
             let b = keystrokes[i + 1];
@@ -85,7 +86,7 @@
                 c = keystrokes[i + 2];
             }
             if (isConsonant(a) && isVowel(b)) {
-                if (!isConsonant(c)) {
+                if (finalIndices[c] == null) {
                     keystrokes.splice(i, 2, compose(a, b));
                 } else {
                     keystrokes.splice(i, 3, compose(a, b, c));
