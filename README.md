@@ -15,9 +15,9 @@ taja.compose('ㅎ', 'ㅏ', 'ㄴ');
 ### taja.decompose(char)
 Decomposes given character into individual letters.
 ```js
-taja.uncompose('많');
+taja.decompose('많');
 // returns 'ㅁㅏㄴㅎ'
-taja.uncompose('ㅟ');
+taja.decompose('ㅟ');
 // returns 'ㅜㅣ'
 ```
 
