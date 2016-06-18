@@ -18,7 +18,7 @@ describe('taja', function() {
     });
     it('should group keystrokes', function() {
         const keystrokes = 'ㅁㅏㅅㅇㅣㅆㄴㅡㄴ ㄱㅗㄱㅣ';
-        const grouped = taja.group(Array.from(keystrokes));
+        const grouped = taja.group(keystrokes);
         const str = '맛있는 고기';
         grouped.should.equal(str);
     });
@@ -30,7 +30,7 @@ describe('taja', function() {
     });
     it('should detect keystroke pauses', function() {
         const keystrokes = ['ㅁㅏ', 'ㅅㅇㅣㅆㄴ', 'ㅡㄴㄱㅗㄱ', 'ㅣ'];
-        const grouped = keystrokes.map(x => taja.group(Array.from(x))).join('');
+        const grouped = keystrokes.map(x => taja.group(x)).join('');
         const cascaded = '맛있는 고기';
         const blocked = '마ㅅ있ㄴㅡㄴ곡ㅣ';
         grouped.should.not.equal(cascaded);
@@ -39,7 +39,7 @@ describe('taja', function() {
     it('should not wipe out information of the original form', function() {
         const str = 'ㅁㅏㅅ있는 고기';
         const ungrouped = taja.ungroup(str);
-        const regrouped = ungrouped.map(x => taja.group(Array.from(x))).join('');
+        const regrouped = ungrouped.map(x => taja.group(x)).join('');
         str.should.equal(regrouped);
         
         const keystrokes = 'ㅁㅏㅅㅇㅣㅆㄴㅡㄴ ㄱㅗㄱㅣ';
@@ -99,7 +99,7 @@ describe('taja', function() {
         taja.compose('ㅎ', 'ㅏ', 'ㄴ').should.equal('한');
         taja.decompose('많').should.equal('ㅁㅏㄴㅎ');
         taja.decompose('ㅟ').should.equal('ㅜㅣ');
-        taja.group(Array.from('ㄴㅏㄹㅏㅅㅁㅏㄹㅆㅏㅁㅣ')).should.equal('나랏말싸미');
+        taja.group('ㄴㅏㄹㅏㅅㅁㅏㄹㅆㅏㅁㅣ').should.equal('나랏말싸미');
         taja.ungroup('옽ㅏ').join('/').should.equal('ㅇㅗㅌ/ㅏ');
     });
 });

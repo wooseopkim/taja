@@ -1,7 +1,7 @@
 
 # TajaJS
 
-TajaJS is a simple Hangul library in JavaScript.
+TajaJS is a simple Hangul library in JavaScript. <br />
 [Demo Web Page (Works on Chrome)](https://linterpreteur.github.io/taja.js/)
 
 ### taja.compose(initial, middle, final)
@@ -24,7 +24,7 @@ taja.decompose('ㅟ');
 ### taja.group(keystrokes)
 Groups `Array` of keystrokes into Hangul `string`.
 ```js
-taja.group(Array.from('ㄴㅏㄹㅏㅅㅁㅏㄹㅆㅏㅁㅣ'));
+taja.group('ㄴㅏㄹㅏㅅㅁㅏㄹㅆㅏㅁㅣ');
 // returns '나랏말싸미'
 ```
 
@@ -35,15 +35,12 @@ taja.ungroup('옽ㅏ');
 // returns ['ㅇㅗㅌ', 'ㅏ']
 ```
 
-### taja.is.hangul(char)
-### taja.is.syllable(char)
-### taja.is.consonant(char)
-### taja.is.vowel(char)
-Returns truth value.
+### taja.is.{hangul|syllable|consonant|vowel}(char)
+Returns `boolean` value.
 
 **NOTE**: It may be classified as a consonant/vowel in some language, but if it is not Hangul, the return value is `false`.
 
-### node
+### npm
 `npm install taja`
 
 ### browser
