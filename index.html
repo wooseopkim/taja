@@ -1,126 +1,131 @@
 <!doctype html>
 <html>
     <head>
-        <meta charset="utf-8">
+        <meta charset="utf-8" />
+        <title></title>
         <script src="./taja.js"></script>
-        <script>
-            ;(function() {
-                const eng = 'QWERTYUIOPASDFGHJKLZXCVBNM';
-                const kor = 'ㅂㅈㄷㄱㅅㅛㅕㅑㅐㅔㅁㄴㅇㄹㅎㅗㅓㅏㅣㅋㅌㅊㅍㅠㅜㅡ';
-                const keyMap = Object.assign(new (function() {
-                    Array.prototype.forEach.call(eng, ((_, i) => { this['Key' + eng[i]] = kor[i]; }));
-                    for (let i = 0; i <= 9; i++) this['Numpad' + i] = this['Digit' + i] = i;
-                })(), {
-                    Backquote: '`',
-                    Minus: '-',
-                    Equal: '=',
-                    Backspace: 'Backspace',
-                    BracketLeft: '[',
-                    BracketRight: ']',
-                    Backslash: '\\',
-                    Semicolon: ';',
-                    Quote: "'",
-                    Enter: '\n',
-                    ShiftLeft: 'ShiftLeft',
-                    Space: ' ',
-                    Comma: ',',
-                    Period: '.',
-                    Slash: '/',
-                });
-                
-                let commitSpan, preeditSpan;
-                window.onload = function() {
-                    commitSpan = document.querySelector('#commit');
-                    preeditSpan = document.querySelector('#preedit');
-                    onKey();
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous" />
+        <script type="text/javascript">
+            const gul = 
+                    `나라말이 중국과 달라, 
+                    한문・한자와 서로 통하지 아니하므로, 
+                    어리석은 백성들이 말하고자 하는 바가 있어도, 
+                    끝내 제 뜻을 펴지 못하는 사람이 많다. 
+                    내가 이를 불쌍히 여겨, 
+                    새로 스물 여덟 글자를 만드니, 
+                    사람마다 하여금 쉽게 익혀, 
+                    날마다 씀에 편하게 하고자 할 따름이다.`
+                            .replace(/\n/g, '').replace(/ +/g, ' ');
+
+            let text, undo;
+            window.onload = function() {
+                text = document.querySelector('#text');
+                undo = document.querySelector('#undo');
+
+                text.value = gul;
+            };
+            const flatten = (x, y) => x.concat(y);
+            const editHistory = [];
+            editHistory.pop = (function (original) {
+                return function() {
+                    const elem = original();
+                    undo.disabled = !(editHistory.length);
+                    return elem;
                 };
-                
-                let commitString = '';
-                let preeditChars = [];
-                
-                let shiftPressed = false;
-                
-                let clipboard = '';
-                
-                window.addEventListener('keydown', function(event) {
-                    let char = keyMap[event.code];
-                    if (char == null || event.defaultPrevented) return;
-                    
-                    if (event.ctrlKey) {
-                        if (event.code === 'KeyC') {
-                            clipboard = window.getSelection().toString();
-                        } else if (event.code === 'KeyV') {
-                            Array.prototype.forEach.call(clipboard, char => {
-                                preeditChars.push(char);
-                                onKey();
-                            });
-                        }
-                        return;
+            })(Array.prototype.pop.bind(editHistory));
+            editHistory.push = (function (original) {
+                return function(elem) {
+                    original(elem);
+                    undo.disabled = !(editHistory.length);
+                };
+            })(Array.prototype.push.bind(editHistory));
+            const handleText = function (producer) {
+                if (text.value) {
+                    const oldVal = text.value;
+                    const newVal = producer(text.value);
+                    if (oldVal !== newVal) {
+                        editHistory.push(oldVal);
+                        text.value = newVal;
                     }
-                    
-                    if (char === 'ShiftLeft') {
-                        shiftPressed = true;
-                        return;
-                    }
-                    if (char === 'Backspace') {
-                        if (preeditChars.length) {
-                            preeditChars.pop();
-                        } else if (commitString.length) {
-                            commitString = commitString.substring(0, commitString.length - 1);
-                        }
-                        onKey();
-                        return;
-                    }
-                    if (shiftPressed) {
-                        const shift =   '~!@#$%^&*()_+{}|ㅃㅉㄸㄲㅆㅒㅖ:"<>?';
-                        const normal =  "`1234567890-=[]\\ㅂㅈㄷㄱㅅㅐㅔ;',./";
-                        const i = normal.indexOf(char);
-                        if (i != -1) {
-                            char = shift[i];
-                        }
-                    }
-                    
-                    preeditChars.push(char);
-                    onKey();
-                    
-                    event.preventDefault();
-                });
-                window.addEventListener('keyup', function(event) {
-                    if (event.defaultPrevented) return;
-                    if (keyMap[event.code] === 'ShiftLeft') {
-                        shiftPressed = false;
-                    };
-                    event.preventDefault();
-                });
-                function onKey() {
-                    const commit = () => {
-                        const complete = grouped[0];
-                        commitString += complete;
-                        preeditChars = preeditChars.slice(taja.ungroup(complete)[0].length);
-                        grouped = grouped.slice(1);
-                    };
-                    let grouped = taja.group(preeditChars);
-                    if (grouped.length > 1) commit();
-                    commitSpan.innerText = commitString;
-                    grouped = grouped.trim() || grouped.trim() + ' ';
-                    preeditSpan.innerText = grouped;
                 }
-            })();
+            };
+            const 초성 = function initials() {
+                handleText(s => taja.ungroup(s).map(xs => xs[0]).filter(taja.is.consonant).join(''));
+            };
+            const 한글 = function hanguls() {
+                handleText(s => taja.group(Array.prototype.filter.call(taja.ungroup(s).reduce(flatten), taja.is.hangul).join('')));
+            };
+            const 자음 = function consonants() {
+                handleText(s => Array.prototype.filter.call(taja.ungroup(s).reduce(flatten), taja.is.consonant).join(''));
+            };
+            const 모음 = function vowels() {
+                handleText(s => Array.prototype.filter.call(taja.ungroup(s).reduce(flatten), taja.is.vowel).join(''));
+            };
+            const 풀어 = function ungroup() {
+                handleText(s => taja.ungroup(s).reduce(flatten));
+            };
+            const 합쳐 = function group() {
+                handleText(s => taja.group(s));
+            };
+            const 복구 = function undo() {
+                if (editHistory.length) {
+                    text.value = editHistory.pop();
+                }
+            };
+            let beforeUndo = '';
+            window.addEventListener('keydown', function(event) {
+                if (event.ctrlKey && event.key === 'z') {
+                    beforeUndo = text.value;
+                }
+            });
+            window.addEventListener('keyup', function(event) {
+                if (event.ctrlKey && event.key === 'z') {
+                    if (text.value === beforeUndo) {
+                        복구();
+                    }
+                }
+            });
         </script>
         <style>
-            span.text {
-                white-space: pre-wrap;
+            div {
+                margin: 10px;
             }
-            #preedit {
-                background-color: black;
-                color:  white;
+            .centered {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                margin-right: -50%;
+                transform: translate(-50%, -50%);
+            }
+            .container {
+                height: 50%
+            }
+            .hcentered {
+                left: 50%;
+                transform: translate(-50%, 0);
+            }
+            #text {
+	            height: 100%;
             }
         </style>
     </head>
     <body>
-        <h1>Hello, TajaJS!</h1>
-        <div>
-            <span id="commit" class="text"></span><span id="preedit" class="text"></span>
+        <div class="centered container">
+            <div class="container">
+                <textarea id="text" class="form-control" rows="8"></textarea>
+            </div>
+            <div class="btn-group hcentered" role="group">
+                <button onclick="초성()" class="btn btn-default">초성만 남기기</button>
+                <button onclick="한글()" class="btn btn-default">한글만 남기기</button>
+                <button onclick="자음()" class="btn btn-default">자음만 남기기</button>
+                <button onclick="모음()" class="btn btn-default">모음만 남기기</button>
+                <button onclick="풀어()" class="btn btn-default">모두 풀기</button>
+                <button onclick="합쳐()" class="btn btn-default">모두 합치기</button>
+                <button onclick="복구()" id="undo" disabled class="btn btn-default">되돌리기</button>
+            </div>
+            <div class="btn-group hcentered" role="group">
+                <button onclick="window.location.href = './automata.html'" class="btn btn-primary" role="button">오토마타</button>
+            </div>
         </div>
     </body>
 </html>

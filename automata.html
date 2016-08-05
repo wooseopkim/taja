@@ -1,0 +1,119 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <script src="./taja.js"></script>
+        <script>
+            ;(function() {
+                let hangulMode = true;
+                const eng = 'qwertyuiopasdfghjklzxcvbnm';
+                const kor = 'ㅂㅈㄷㄱㅅㅛㅕㅑㅐㅔㅁㄴㅇㄹㅎㅗㅓㅏㅣㅋㅌㅊㅍㅠㅜㅡ';
+                
+                let commitSpan, preeditSpan;
+                window.onload = function() {
+                    commitSpan = document.querySelector('#commit');
+                    preeditSpan = document.querySelector('#preedit');
+                    onKey();
+                };
+                
+                let commitString = '';
+                let preeditChars = [];
+                
+                let clipboard = '';
+                
+                window.addEventListener('keydown', function(event) {
+                    console.log(event);
+
+                    if (event.code === 'AltRight' || event.key === 'HangulMode' || event.key === 'KanaMode') {
+                        hangulMode = !hangulMode;
+                        console.log('hangul', hangulMode);
+                        return;
+                    }
+                    
+                    if (event.key === 'Backspace') {
+                        if (preeditChars.length) {
+                            preeditChars.pop();
+                        } else if (commitString.length) {
+                            commitString = commitString.substring(0, commitString.length - 1);
+                        }
+                        onKey();
+                        event.preventDefault();
+                        return;
+                    }
+                    
+                    if (event.ctrlKey) {
+                        if (event.key === 'c') {
+                            clipboard = window.getSelection().toString();
+                        } else if (event.key === 'v') {
+                            Array.prototype.forEach.call(clipboard, char => {
+                                preeditChars.push(char);
+                                onKey();
+                            });
+                        }
+                        return;
+                    }
+
+                    let char = event.key === 'Enter' ? '\n' : event.key;
+                    if (char == null || char.length > 1 || event.defaultPrevented) return;
+
+                    if (hangulMode) {
+                        if (char.toLowerCase) {
+                            const i = eng.indexOf(char.toLowerCase());
+                            if (i !== -1) {
+                                char = kor.charAt(i);
+                                console.log('hangul', char);
+                            }
+                        }
+                    }
+
+                    if (event.shiftKey && char) {
+                        if (char.toUpperCase && char != char.toUpperCase()) {
+                            char = char.toUpperCase();
+                        } else {
+                            const shift =   '~!@#$%^&*()_+{}|ㅃㅉㄸㄲㅆㅒㅖ:"<>?';
+                            const normal =  "`1234567890-=[]\\ㅂㅈㄷㄱㅅㅐㅔ;',./";
+                            const i = normal.indexOf(char);
+                            if (i != -1) {
+                                char = shift[i];
+                                console.log('shift', char);
+                            }
+                        }
+                    }
+                    
+                    if (char) preeditChars.push(char);
+                    onKey();
+                    
+                    event.preventDefault();
+                });
+                function onKey() {
+                    const commit = () => {
+                        const complete = grouped[0];
+                        commitString += complete;
+                        preeditChars = preeditChars.slice(taja.ungroup(complete)[0].length);
+                        grouped = grouped.slice(1);
+                    };
+                    let grouped = taja.group(preeditChars);
+                    if (grouped.length > 1) commit();
+                    commitSpan.innerText = commitString;
+                    grouped = grouped.trim() || grouped.trim() + ' ';
+                    preeditSpan.innerText = grouped;
+                }
+            })();
+        </script>
+        <style>
+            span.text {
+                white-space: pre-wrap;
+            }
+            #preedit {
+                background-color: black;
+                color:  white;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Hello, TajaJS!</h1>
+        <div>
+            <span id="commit" class="text"></span><span id="preedit" class="text"></span>
+        </div>
+    </body>
+</html>
