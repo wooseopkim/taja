@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/crossJS.iml" filepath="$PROJECT_DIR$/.idea/modules/crossJS.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/crossJS-build.iml" filepath="$PROJECT_DIR$/.idea/modules/crossJS-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/crossJVM.iml" filepath="$PROJECT_DIR$/.idea/modules/crossJVM.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/crossJVM-build.iml" filepath="$PROJECT_DIR$/.idea/modules/crossJVM-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/root.iml" filepath="$PROJECT_DIR$/.idea/modules/root.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/root-build.iml" filepath="$PROJECT_DIR$/.idea/modules/root-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/taja-sources.iml" filepath="$PROJECT_DIR$/.idea/modules/taja-sources.iml" />
+    </modules>
+  </component>
+</project>
