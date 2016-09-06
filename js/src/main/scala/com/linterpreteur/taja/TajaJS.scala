@@ -19,7 +19,7 @@ object TajaJS {
   def decompose(char: String): String = Taja.decompose(char)
 
   @JSExport
-  def group(string: String): String = Taja.group(string)
+  def group(string: Array[String]): String = Taja.group(string.map(str2char))
 
   @JSExport
   def ungroup(string: String): Array[String] = Taja.ungroup(string).toJSArray
