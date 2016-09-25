@@ -40,8 +40,12 @@ Returns `boolean` value.
 
 **NOTE**: It may be classified as a consonant/vowel in some language, but if it is not Hangul, the return value is `false`.
 
-### npm
-`npm install taja`
+### Web
+```html
+<!-- built with Scala.js -->
+<script src="./taja-opt.js"></script> <!-- or taja-fastopt.js -->
 
-### browser
-`<script src="taja.js"></script>`
+<!-- /js/src/main/scala/com/linterpreteur/taja/ -->
+<!-- this should come after taja-[fast]opt.js -->
+<script src="./taja_boot.js"></script>
+```
