@@ -75,7 +75,7 @@ Taja.isHangul('한')
 // returns true
 ```
 
-``js
+```js
 taja.is.hangul('한');
 // returns true
 ```
