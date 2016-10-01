@@ -3127,17 +3127,17 @@ $c_Lcom_linterpreteur_taja_TajaJS$.prototype.compose = (function(arg$1, arg$2) {
     jsx$2 = ((jsx$2 + 1) | 0)
   };
   switch ($uI(arg$rest.length)) {
-    case 0: {
-      var prep0 = $as_T(arg$1);
-      var prep1 = $as_T(arg$2);
-      return this.$$js$exported$meth$compose__T__T__O(prep0, prep1);
-      break
-    }
     case 1: {
       var prep0 = $as_T(arg$1);
       var prep1 = $as_T(arg$2);
       var prep2 = $as_T(arg$rest[0]);
       return this.$$js$exported$meth$compose__T__T__T__O(prep0, prep1, prep2);
+      break
+    }
+    case 0: {
+      var prep0 = $as_T(arg$1);
+      var prep1 = $as_T(arg$2);
+      return this.$$js$exported$meth$compose__T__T__O(prep0, prep1);
       break
     }
     default: {
