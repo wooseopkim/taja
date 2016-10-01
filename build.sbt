@@ -1,5 +1,3 @@
-import sbt.Keys._
-
 name := "Taja"
 
 scalaVersion in ThisBuild := "2.11.8"
@@ -15,7 +13,7 @@ lazy val cross = crossProject.in(file(".")).
   settings(
     name := "Taja",
 
-    version := "1.1.0",
+    version := "2.0.0",
 
     resolvers += "Artima Maven Repository" at "http://repo.artima.com/releases",
 

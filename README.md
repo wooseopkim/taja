@@ -47,5 +47,5 @@ Returns `boolean` value.
 
 <!-- /js/src/main/scala/com/linterpreteur/taja/ -->
 <!-- this should come after taja-[fast]opt.js -->
-<script src="./taja_boot.js"></script>
+<script src="./taja-init.js"></script>
 ```
