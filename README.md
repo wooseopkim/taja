@@ -1,5 +1,4 @@
-
-# Taja
+# Taja [![Scala.js](https://www.scala-js.org/assets/badges/scalajs-0.6.8.svg)](https://www.scala-js.org) [![Build Status](https://travis-ci.org/linterpreteur/taja.svg?branch=2.0.0)](https://travis-ci.org/linterpreteur/taja)
 
 Taja is a simple Hangul library in ScalaJS. <br />
 [Demo Web Page](https://linterpreteur.github.io/taja/)
