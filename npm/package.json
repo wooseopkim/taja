@@ -1,0 +1,20 @@
+{
+  "name": "taja",
+  "description": "Hangul manipulation library automatically generated from https://github.com/linterpreteur/taja",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/linterpreteur/taja.git"
+  },
+  "keywords": [
+    "hangul",
+    "korean"
+  ],
+  "author": "Wooseop Kim",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/linterpreteur/taja/issues"
+  },
+  "homepage": "https://github.com/linterpreteur/taja#readme",
+  "version": "2.0.0-gen.1482473958342"
+}
