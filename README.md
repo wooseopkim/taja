@@ -1,4 +1,4 @@
-# Taja [![Build Status](https://travis-ci.org/linterpreteur/taja.svg?branch=master)](https://travis-ci.org/linterpreteur/taja) [![Scala.js](https://www.scala-js.org/assets/badges/scalajs-0.6.13.svg)](https://www.scala-js.org) ![npm Version](https://img.shields.io/npm/v/taja.svg) [![JitPack](https://jitpack.io/v/linterpreteur/taja.svg)](https://jitpack.io/#linterpreteur/taja)
+# Taja [![Build Status](https://travis-ci.org/linterpreteur/taja.svg?branch=master)](https://travis-ci.org/linterpreteur/taja) [![Scala.js](https://www.scala-js.org/assets/badges/scalajs-0.6.13.svg)](https://www.scala-js.org) [![JitPack](https://jitpack.io/v/linterpreteur/taja.svg)](https://jitpack.io/#linterpreteur/taja) [![npm Version](https://img.shields.io/npm/v/taja.svg)](https://www.npmjs.com/package/taja)
 
 
 Taja is a simple Hangul library in ScalaJS.  
