@@ -11,9 +11,13 @@ const fs = require('fs')
 const exec = require('child_process').execSync
 const packageJson = require('./package.json')
 delete packageJson.devDependencies
+delete packageJson.scripts
 
 const fastOpt = exec('sbt fastOptJS')
 console.log(fastOpt.toString())
+
+const fullOpt = exec('sbt fullOptJS')
+console.log(fullOpt.toString())
 
 const readme = fs.readFileSync('README.md').toString()
 

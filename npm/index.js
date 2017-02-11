@@ -1,1 +1,1 @@
-module.exports = require('./taja-fastopt').taja()
+(typeof window == 'undefined' ? {} : window).taja = (typeof module == 'undefined' ? {} : module).exports = require('./taja-fastopt').taja()

@@ -1,9 +1,9 @@
 const path = require('path')
 
 module.exports = {
-  entry: './npm/taja-fastopt.js',
+  entry: './npm/index.js',
   output: {
-    filename: 'index.js',
-    path: path.join(__dirname, 'npm', 'dist')
+    filename: 'dist.js',
+    path: path.join(__dirname, 'npm')
   }
 }
