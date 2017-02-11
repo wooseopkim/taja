@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/linterpreteur/taja/issues"
   },
-  "homepage": "https://github.com/linterpreteur/taja#readme"
+  "homepage": "https://github.com/linterpreteur/taja#readme",
+  "devDependencies": {
+    "webpack": "^2.2.1"
+  },
+  "scripts": {
+    "build": "webpack -p"
+  }
 }

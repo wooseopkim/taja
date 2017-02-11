@@ -63,3 +63,5 @@ crashlytics-build.properties
 npm/*
 !npm/index.js
 !npm/.npmignore
+
+**/node_modules
