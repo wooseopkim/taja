@@ -17,6 +17,12 @@ or, if you're not using ES2015+,
 var taja = require('taja')
 ```
 
+You can also use it directly on browsers without npm dependency.
+
+```html
+<script src="//unpkg.com/taja/dist.js"></src>
+```
+
 # API
 
 ```ts

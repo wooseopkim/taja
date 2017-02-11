@@ -17,6 +17,12 @@ import * as taja from 'taja'
 var taja = require('taja')
 ```
 
+npm 없이 브라우저에서 바로 사용할 수도 있습니다.
+
+```html
+<script src="//unpkg.com/taja/dist.js"></src>
+```
+
 # API
 
 ```ts
