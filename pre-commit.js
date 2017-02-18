@@ -1,5 +1,8 @@
 `The "REAL" pre-commit hook is:
 #!/bin/sh
+echo Running tests
+sbt test
+npm run test
 echo Running pre-commit hook
 node ./pre-commit.js
 Code=$?
@@ -10,8 +13,8 @@ exit $Code
 const fs = require('fs')
 const exec = require('child_process').execSync
 const packageJson = require('./package.json')
-delete packageJson.devDependencies
-delete packageJson.scripts
+delete packageJson.devDependencies.webpack
+delete packageJson.scripts.build
 
 const fastOpt = exec('sbt fastOptJS')
 console.log(fastOpt.toString())

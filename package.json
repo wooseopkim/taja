@@ -1,6 +1,6 @@
 {
   "name": "taja",
-  "description": "Hangul manipulation library automatically generated from https://github.com/linterpreteur/taja",
+  "description": "Hangul manipulation library built with ScalaJS",
   "main": "index.js",
   "repository": {
     "type": "git",
@@ -17,9 +17,12 @@
   },
   "homepage": "https://github.com/linterpreteur/taja#readme",
   "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0",
     "webpack": "^2.2.1"
   },
   "scripts": {
-    "build": "webpack -p"
+    "build": "webpack -p",
+    "test": "mocha"
   }
 }
