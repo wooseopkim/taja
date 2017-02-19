@@ -1,9 +1,13 @@
 `The "REAL" pre-commit hook is:
 #!/bin/sh
 echo Running tests
-sbt test
-npm run test
-echo Running pre-commit hook
+sbt test && npm run test
+Code=$?
+if [ Code -ne 0 ]; then
+  echo "Exit code $Code"
+  exit $Code
+fi
+echo Running pre-commit.js
 node ./pre-commit.js
 Code=$?
 echo "Exit code $Code"
