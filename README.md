@@ -2,7 +2,7 @@
 
 
 Taja is a simple Hangul library in ScalaJS.  
-You can see live demo [here](https://linterpreteur.github.io/taja/).
+You can see live demo [here](https://wooseopkim.github.io/taja/).
 
 ### Guide
 
