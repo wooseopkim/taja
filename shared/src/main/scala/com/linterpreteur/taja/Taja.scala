@@ -65,7 +65,7 @@ object Taja {
     case None => ""
   }
   private def unmerge(char: Char) : String = keystrokes.getOrElse(char, char).toString
-  private def merge(chars: Option[Char]*): String = merge(chars.collect { case Some(x) => x }: _*)
+  private def merge(first: Option[Char], rest: Option[Char]*): String = merge((Seq(first) ++ rest).collect { case Some(x) => x }: _*)
   private def merge(chars: Char*): String = combinations.getOrElse(chars.mkString, chars).toString
 
   def compose(initial: Char, middle: Char): String = compose(Some(initial), Some(middle))
