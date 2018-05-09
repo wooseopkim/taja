@@ -15,9 +15,8 @@
             <option value="$PROJECT_DIR$/shared" />
           </set>
         </option>
-        <option name="sbtVersion" value="0.13.8" />
+        <option name="sbtVersion" value="1.1.2" />
         <option name="useAutoImport" value="true" />
-        <option name="useOurOwnAutoImport" value="true" />
       </SbtProjectSettings>
     </option>
   </component>

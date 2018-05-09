@@ -3,7 +3,7 @@ import sbt._
 
 name := "Taja"
 
-scalaVersion in ThisBuild := "2.11.8"
+scalaVersion in ThisBuild := "2.12.6"
 
 lazy val root = (project in file(".")).
   aggregate(jvm, js)
@@ -12,9 +12,7 @@ lazy val cross = crossProject.in(file(".")).
   settings(
     name := "Taja",
 
-    version := "2.0.0",
-
-    resolvers += "Artima Maven Repository" at "http://repo.artima.com/releases",
+    version := "2.0.1",
 
     libraryDependencies ++= Seq(
       "org.scalactic" %% "scalactic" % "3.0.0",
@@ -32,3 +30,5 @@ lazy val cross = crossProject.in(file(".")).
 
 lazy val jvm = cross.jvm
 lazy val js = cross.js.enablePlugins(ScalaJSPlugin)
+
+resolvers += "Artima Maven Repository" at "http://repo.artima.com/releases"

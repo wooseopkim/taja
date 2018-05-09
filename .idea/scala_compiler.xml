@@ -2,15 +2,26 @@
 <project version="4">
   <component name="ScalaCompilerConfiguration">
     <option name="incrementalityType" value="SBT" />
-    <profile name="SBT 1" modules="root,root,crossJVM">
+    <profile name="SBT 1" modules="">
       <plugins>
         <plugin path="C:\Users\guana\.ivy2\cache\com.artima.supersafe\supersafe_2.11.8\jars\supersafe_2.11.8-1.1.0.jar" />
       </plugins>
     </profile>
-    <profile name="SBT 2" modules="crossJS">
+    <profile name="SBT 2" modules="">
       <plugins>
         <plugin path="C:\Users\guana\.ivy2\cache\com.artima.supersafe\supersafe_2.11.8\jars\supersafe_2.11.8-1.1.0.jar" />
         <plugin path="C:\Users\guana\.ivy2\cache\org.scala-js\scalajs-compiler_2.11.8\jars\scalajs-compiler_2.11.8-0.6.13.jar" />
+      </plugins>
+    </profile>
+    <profile name="sbt 1" modules="crossJS">
+      <plugins>
+        <plugin path="$USER_HOME$/.ivy2/cache/org.scala-js/scalajs-compiler_2.12.6/jars/scalajs-compiler_2.12.6-0.6.22.jar" />
+        <plugin path="$USER_HOME$/.ivy2/cache/com.artima.supersafe/supersafe_2.12.6/jars/supersafe_2.12.6-1.1.5.jar" />
+      </plugins>
+    </profile>
+    <profile name="sbt 3" modules="root,crossJVM">
+      <plugins>
+        <plugin path="$USER_HOME$/.ivy2/cache/com.artima.supersafe/supersafe_2.12.6/jars/supersafe_2.12.6-1.1.5.jar" />
       </plugins>
     </profile>
   </component>
