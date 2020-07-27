@@ -1,24 +1,9 @@
-`The "REAL" pre-commit hook is:
-#!/bin/sh
-echo Running tests
-sbt test && npm run test
-Code=$?
-if [ Code -ne 0 ]; then
-  echo "Exit code $Code"
-  exit $Code
-fi
-echo Running pre-commit.js
-node ./pre-commit.js
-Code=$?
-echo "Exit code $Code"
-exit $Code
-`
-
 const fs = require('fs')
 const exec = require('child_process').execSync
 const packageJson = require('./package.json')
 delete packageJson.devDependencies.webpack
 delete packageJson.scripts.build
+delete packageJson.scripts.publish
 
 const fastOpt = exec('sbt fastOptJS')
 console.log(fastOpt.toString())

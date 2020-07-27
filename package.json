@@ -23,6 +23,7 @@
   },
   "scripts": {
     "build": "webpack -p",
+    "publish": "node ./publish.js",
     "test": "mocha"
   }
 }
