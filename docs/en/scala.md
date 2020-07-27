@@ -14,15 +14,15 @@ allprojects {
 2. Add the **app level** dependency
 ```gradle
 dependencies {
-    compile 'com.github.linterpreteur.taja:taja_2.11:2.0.0'
+    compile 'com.github.wooseopkim.taja:taja_2.11:2.0.0'
 }
 ```
 
-If you use Maven, SBT, or Leiningen, please follow [JitPack instructions](https://jitpack.io/#linterpreteur/taja).
+If you use Maven, SBT, or Leiningen, please follow [JitPack instructions](https://jitpack.io/#wooseopkim/taja).
 
 # API
 
-All methods are declared under `object com.linterpreteur.taja.Taja`.
+All methods are declared under `object com.wooseopkim.taja.Taja`.
 
 ```scala
 /**

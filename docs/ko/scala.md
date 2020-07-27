@@ -14,15 +14,15 @@ allprojects {
 2. **앱 수준** 디펜던시를 추가합니다.
 ```gradle
 dependencies {
-    compile 'com.github.linterpreteur.taja:taja_2.11:2.0.0'
+    compile 'com.github.wooseopkim.taja:taja_2.11:2.0.0'
 }
 ```
 
-Maven, SBT, Leiningen을 사용하신다면 [JitPack](https://jitpack.io/#linterpreteur/taja)을 참고하세요.
+Maven, SBT, Leiningen을 사용하신다면 [JitPack](https://jitpack.io/#wooseopkim/taja)을 참고하세요.
 
 # API
 
-All methods are declared under `object com.linterpreteur.taja.Taja`.
+All methods are declared under `object com.wooseopkim.taja.Taja`.
 
 ```scala
 /**

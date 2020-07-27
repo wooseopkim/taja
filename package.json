@@ -4,7 +4,7 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/linterpreteur/taja.git"
+    "url": "git+https://github.com/wooseopkim/taja.git"
   },
   "keywords": [
     "hangul",
@@ -13,9 +13,9 @@
   "author": "Wooseop Kim",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/linterpreteur/taja/issues"
+    "url": "https://github.com/wooseopkim/taja/issues"
   },
-  "homepage": "https://github.com/linterpreteur/taja#readme",
+  "homepage": "https://github.com/wooseopkim/taja#readme",
   "devDependencies": {
     "chai": "^3.5.0",
     "mocha": "^3.2.0",
